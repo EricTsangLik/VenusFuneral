@@ -1,0 +1,148 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+media_folder: public/img
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: djblau8at
+    api_key: 583977975538897
+public_folder: img
+collections:
+  - label: "殯儀知識"
+    name: "blog"
+    folder: "_posts/blog"
+    create: true
+    fields:
+      - {label: "標題", name: "title", widget: "string"}
+      - {label: "建立日期", name: "date", widget: "datetime"}
+      - {label: "相片", name: "thumbnail", widget: "image"}
+      - {label: "內容", name: "body", widget: "markdown"}
+  - name: "pages"
+    label: "頁面"
+    files:
+      - label: "主頁服務概覽"
+        name: "serviceOverviews"
+        file: "content/serviceOverviews.md"
+        fields:
+          - { label: "主頁Banner", name: "banner", widget: "image" }
+          - label: "任務"
+            name: "missions"
+            widget: list
+            fields:
+              - { label: "內容", name: "text", widget: "string" }
+          - label: "服務"
+            name: "services"
+            widget: list
+            fields:
+              - { label: "服務名稱", name: "serviceName", widget: "string" }
+              - { label: "預覽相片", name: "thumbnail", widget: "image" }
+              - { label: "服務相片", name: "serviceImage", widget: "image", required: false }
+              - { label: "次要服務相片", name: "secondaryServiceImage", widget: "image", required: false }
+              - { label: "服務詳情", name: "serviceDescription", widget: "markdown", required: false }
+          - label: "服務重點"
+            name: "sellPoints"
+            widget: list
+            fields:
+              - { label: "標題", name: "header", widget: "string" }
+              - { label: "內容", name: "content", widget: "text" }
+              - { label: "相片", name: "image", widget: "image" }
+      - label: "關於金星"
+        name: "aboutus"
+        file: "content/aboutus.md"
+        fields:
+          - { label: "公司簡介", name: "companyIntro", widget: "markdown" }
+          - { label: "創辦人介紹", name: "founderIntro", widget: "markdown" }
+          - label: "媒體報導"
+            name: "mediaReports"
+            widget: "list"
+            fields:
+              - { label: "標題", name: "header", widget: "string", required: false }
+              - { label: "預覽相片", name: "thumbnail", widget: "image" }
+              - { label: "Link", name: "link", widget: "string" }
+          - label: "使命與願景"
+            name: "missions"
+            widget: "list"
+            fields:
+              - { label: "標題", name: "header", widget: "string" }
+              - { label: "內容", name: "description", widget: "text" }
+          - label: "服務承諾"
+            name: "ourPromises"
+            widget: "list"
+            default: [""]
+      - label: "特色服務"
+        name: "specialServices"
+        file: "content/specialServices.md"
+        fields:
+          - label: "服務"
+            name: "services"
+            widget: list
+            fields:
+              - { label: "服務名稱", name: "serviceName", widget: "string" }
+              - { label: "預覽相片", name: "thumbnail", widget: "image", required: false }
+              - { label: "價格至", name: "priceTo", widget: "number", required: false }
+              - { label: "價格由", name: "priceFrom", widget: "number", required: false }
+              - { label: "服務詳情", name: "serviceDescription", widget: "text", required: false }
+      - label: "帛事花牌"
+        name: "flowerService"
+        file: "content/flowerService.md"
+        fields:
+          - { label: "Banner 相片", name: "bannerImage", widget: "image" }
+          - { label: "描述", name: "description", widget: "text" }
+          - label: "服務重點"
+            name: "serviceKeyPoints"
+            widget: "list"
+            fields:
+              - { label: "重點", name: "keyPoint", widget: "string" }
+          - label: "花牌相片"
+            name: "services"
+            widget: list
+            fields:
+              - { label: "花牌名稱", name: "flowerName", widget: "string" }
+              - { label: "相片", name: "thumbnail", widget: "image" }
+              - { label: "價格", name: "price", widget: "number" }
+              - { label: "等級", name: "tier", widget: "select", options: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"] }
+      - label: "服務流程"
+        name: "processes"
+        file: "content/processes.md"
+        fields:
+          - label: "流程"
+            name: "processes"
+            widget: "list"
+            fields:
+              - { label: "內容", name: "step", widget: "string" }
+      - label: "聯絡我們"
+        name: "contactus"
+        file: "content/contactus.md"
+        fields:
+          - { label: "描述", name: "description", widget: "text",  required: false }
+          - { label: "Google Map Url", name: "googleMapUrl", widget: "string", required: false }
+          - { label: "電話", name: "phoneNumber", widget: "string", required: false }
+          - { label: "Whatsapp", name: "whatsapp", widget: "number", required: false }
+          - { label: "電郵地址", name: "email", widget: "string", required: false }
+          - { label: "Facebook Link", name: "facebookLink", widget: "string", required: false }
+          - { label: "Instagram Link", name: "instagramLink", widget: "string", required: false }
+      - label: "客戶見證"
+        name: "testimonies"
+        file: "content/testimonies.md"
+        fields:
+          - label: "見證"
+            name: "testimonies"
+            widget: "list"
+            fields:
+              - { label: "客戶名稱", name: "name", widget: "string" }
+              - { label: "內容", name: "content", widget: "text" }
+              - { label: "日期", name: "createdDate", widget: "date", required: false }
+      - label: "媒體報導"
+        name: "mediaReports"
+        file: "content/mediaReports.md"
+        fields:
+          - label: "報導"
+            name: "reports"
+            widget: "list"
+            fields:
+              - { label: "標題", name: "header", widget: "string", required: false }
+              - { label: "Quote", name: "quote", widget: "string" }
+              - { label: "預覽相片", name: "thumbnail", widget: "image" }
+              - { label: "Link", name: "link", widget: "string" }
+local_backend: true

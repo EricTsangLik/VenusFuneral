@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "cd ../.. && yarn build venus-funeral-website",
+  "outputDirectory": "apps/venus-funeral-website/.next",
+  "framework": "nextjs",
+  "installCommand": "yarn install",
+  "env": {
+    "facebookUrl": "https://www.facebook.com/金星殯儀服務-395066911133842/",
+    "phone": "9381 0003",
+    "email": "info@venusfuneralservice.com"
+  }
+}
+
