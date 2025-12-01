@@ -76,6 +76,7 @@ export const navItems = [
   { label: '關於我們', href: '/about' },
   { label: '服務概覽', href: '/services' },
   { label: '兇宅/遺宅清潔', href: '/cleaning' },
+  { label: '骨灰罈位買賣', href: '/columbarium' },
   { label: '服務流程', href: '/processes' },
   { label: '帛事花牌', href: '/flowers' },
   { label: '殯儀知識', href: '/knowledges' },
