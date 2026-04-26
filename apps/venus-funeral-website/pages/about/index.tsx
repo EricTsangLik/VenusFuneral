@@ -96,7 +96,7 @@ const OutterWrapper = styled.div`
   }
 `
 
-const AboutusPage: NextPage = () => {
+const AboutusPage: NextPage = ({ reports = [] }: any) => {
   console.log('mount')
   return (
     <PageLayout title="關於我們" description={companyIntro}>
@@ -125,9 +125,28 @@ const AboutusPage: NextPage = () => {
           </OwnerContainer>
         </OutterWrapper>
       </Fade>
-      <MediaReportCarousel/>
+      <MediaReportCarousel reports={reports} />
     </PageLayout>
   )
+}
+
+export async function getStaticProps() {
+  const fs = require('fs')
+  const matter = require('gray-matter')
+  const safeJsonStringify = require('safe-json-stringify')
+
+  const filesInMedia = fs.readdirSync('./_posts/media/')
+  const reports = filesInMedia.map((filename: string) => {
+    const file = fs.readFileSync(`./_posts/media/${filename}`, 'utf8')
+    const matterData = matter(file)
+    return JSON.parse(safeJsonStringify(matterData.data))
+  })
+
+  return {
+    props: {
+      reports,
+    },
+  }
 }
 
 export default AboutusPage

@@ -7,11 +7,8 @@ import { Autoplay, Pagination, Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { useState } from 'react';
 
 const CleaningPage = () => {
-  const [showBeforeAfter, setShowBeforeAfter] = useState(false);
-  
   const whatsappNumber = '+85293810003';
   const whatsappMessage = encodeURIComponent('想了解兇宅/遺宅清潔服務報價');
   const whatsappLink = `https://wa.me/${whatsappNumber.replace(/[+\s]/g, '')}?text=${whatsappMessage}`;
@@ -217,60 +214,33 @@ const CleaningPage = () => {
             清潔成果展示
           </SectionTitle>
           
-          {!showBeforeAfter ? (
-            <DisclaimerBox>
-              <DisclaimerIcon>⚠️</DisclaimerIcon>
-              <DisclaimerTitle component="h3" fontSize="h5">
-                內容警告 / Content Warning
-              </DisclaimerTitle>
-              <DisclaimerText component="p" fontSize="body1">
-                以下圖片包含血跡及現場清潔前的真實情況，內容可能令人感到不適。
-                <br />
-                <br />
-                The following images contain blood and actual scenes before cleaning, which may be disturbing to some viewers.
-              </DisclaimerText>
-              <DisclaimerCheckbox>
-                <input 
-                  type="checkbox" 
-                  id="consent" 
-                  onChange={(e) => setShowBeforeAfter(e.target.checked)}
+          <BeforeAfterContainer>
+            <ComparisonWrapper>
+              <ImageBox>
+                <ImageLabel component="h4" fontSize="h6">
+                  清潔前 Before
+                </ImageLabel>
+                <ComparisonImage 
+                  src="/cleaning-before.jpeg" 
+                  alt="清潔前" 
                 />
-                <label htmlFor="consent">
-                  我已閱讀並理解以上警告，同意查看相關圖片
-                  <br />
-                  I have read and understand the warning above and consent to view the images
-                </label>
-              </DisclaimerCheckbox>
-            </DisclaimerBox>
-          ) : (
-            <BeforeAfterContainer>
-              <ComparisonWrapper>
-                <ImageBox>
-                  <ImageLabel component="h4" fontSize="h6">
-                    清潔前 Before
-                  </ImageLabel>
-                  <ComparisonImage 
-                    src="/cleaning-before.jpeg" 
-                    alt="清潔前" 
-                  />
-                </ImageBox>
-                <ImageBox>
-                  <ImageLabel component="h4" fontSize="h6">
-                    清潔後 After
-                  </ImageLabel>
-                  <ComparisonImage 
-                    src="/cleaning-after.jpeg" 
-                    alt="清潔後" 
-                  />
-                </ImageBox>
-              </ComparisonWrapper>
-              <BeforeAfterNote component="p" fontSize="body2">
-                * 以上為實際清潔案例，效果因應個別情況而有所不同
-                <br />
-                * Actual cleaning case results may vary depending on individual circumstances
-              </BeforeAfterNote>
-            </BeforeAfterContainer>
-          )}
+              </ImageBox>
+              <ImageBox>
+                <ImageLabel component="h4" fontSize="h6">
+                  清潔後 After
+                </ImageLabel>
+                <ComparisonImage 
+                  src="/cleaning-after.jpeg" 
+                  alt="清潔後" 
+                />
+              </ImageBox>
+            </ComparisonWrapper>
+            <BeforeAfterNote component="p" fontSize="body2">
+              * 以上為實際清潔案例，效果因應個別情況而有所不同
+              <br />
+              * Actual cleaning case results may vary depending on individual circumstances
+            </BeforeAfterNote>
+          </BeforeAfterContainer>
         </BeforeAfterSection>
 
         {/* Quotation Details Section */}
@@ -895,63 +865,6 @@ const BeforeAfterSection = styled.section`
 
   ${({ theme }) => theme.breakPoints.tablet} {
     margin-bottom: 120px;
-  }
-`;
-
-const DisclaimerBox = styled.div`
-  background: #fff3cd;
-  border: 3px solid #ffc107;
-  border-radius: 16px;
-  padding: 40px;
-  text-align: center;
-  box-shadow: 0 4px 16px rgba(255, 193, 7, 0.2);
-  max-width: 800px;
-  margin: 0 auto;
-
-  ${({ theme }) => theme.breakPoints.tablet} {
-    padding: 60px;
-  }
-`;
-
-const DisclaimerIcon = styled.div`
-  font-size: 64px;
-  margin-bottom: 24px;
-`;
-
-const DisclaimerTitle = styled(Text)`
-  margin-bottom: 24px;
-  color: #856404;
-  font-weight: 700;
-`;
-
-const DisclaimerText = styled(Text)`
-  color: #856404;
-  line-height: 1.8;
-  margin-bottom: 32px;
-`;
-
-const DisclaimerCheckbox = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 32px;
-
-  input[type="checkbox"] {
-    margin-top: 4px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-
-  label {
-    text-align: left;
-    color: #856404;
-    font-size: 16px;
-    line-height: 1.6;
-    cursor: pointer;
-    user-select: none;
   }
 `;
 

@@ -10,139 +10,232 @@ import {
   MdOutlinePhoneAndroid,
   MdOutlineFacebook,
 } from 'react-icons/md'
-import { ReactComponent as AvatarIcon } from '../../public/avatar1.svg'
+import { FaWhatsapp } from 'react-icons/fa'
 import ContactForm from '../../components/ContactForm'
 import { attributes } from '../../../../content/contactus.md'
 
-const { phoneNumber, email, facebookLink, description } = attributes
-console.log('attributes', attributes)
+const { phoneNumber, email, facebookLink, description, whatsapp } = attributes
 
-const ContactContainer = styled(Container)`
+const HeroSection = styled.div`
   position: relative;
-  
-  ${({ theme }) => theme.breakPoints.desktop} {
-    margin-bottom: 120px;
-    height: 600px;
-  }
-`
-
-const ContactBgImage = styled.img`
-  height: 100%;
-  width: 50%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/contact.jpg');
   background-size: cover;
-  background-position: left;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: -1;
-  border-radius: 12px;
-  display: none;
+  background-position: center;
+  margin-bottom: 60px;
 
   ${({ theme }) => theme.breakPoints.desktop} {
-    display: block;
+    height: 400px;
+    margin-bottom: 80px;
   }
 `
 
-const ContactDetail = styled.div`
-  height: 100%;
-  z-index: 2;
+const HeroTitle = styled(Header)`
+  color: white;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 `
 
-const ContactDetailsCardContainer = styled.div`
+const HeroSubtitle = styled(Text)`
+  color: white;
+  margin-top: 16px;
+  text-align: center;
+  max-width: 600px;
+`
+
+const MainContainer = styled(Container)`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 48px;
+  margin-bottom: 80px;
 
   ${({ theme }) => theme.breakPoints.desktop} {
     flex-direction: row;
+    gap: 80px;
+    margin-bottom: 120px;
   }
 `
 
-const ContactDetailsCard = styled.div`
-  box-shadow: 0 6px 20px rgb(0 0 0 / 20%);
-  background-color: white;
-  padding: 24px;
-  height: 100%;
-  width: 100%;
+const InfoSection = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 32px;
+`
+
+const FormSection = styled.div`
+  flex: 1;
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border-top: 4px solid ${({ theme }) => theme.colors.gold};
+  align-self: flex-start;
+  width: 100%;
+`
+
+const SectionTitle = styled(Text)`
+  margin-bottom: 24px;
+  color: ${({ theme }) => theme.colors.default};
+`
+
+const FormSectionTitle = styled(SectionTitle)`
+  margin-bottom: 32px;
+`
+
+const IntroText = styled(Text)`
+  margin-bottom: 32px;
+  display: block;
+  line-height: 1.6;
+  color: #666;
+`
+
+const ContactItem = styled.div`
+  display: flex;
   align-items: flex-start;
+  gap: 20px;
+  padding: 24px;
+  background: ${({ theme }) => theme.colors.lightkhaki};
   border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 
-  ${({ theme }) => theme.breakPoints.desktop} {
-    width: 40%;
-    min-width: 300px;
-    padding: 24px 48px;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(180, 134, 80, 0.15);
+    border-color: ${({ theme }) => theme.colors.gold};
   }
 `
 
-const StyledAvastar = styled(AvatarIcon)`
-  margin-bottom: 28px;
+const IconWrapper = styled.div`
+  background: white;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  align-self: center;
-  svg {
-    width: 100%;
-    height: 36px;
-  }
-`
-
-const ContactTextContainer = styled.div`
-  padding: 4px;
-  margin-bottom: 4px;
   display: flex;
   align-items: center;
-  color: ${(props) => props.theme.colors.gold};
-  font-size: 36px;
-  gap: 12px;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  flex-shrink: 0;
 
-  & a {
-    display: flex;
-    align-items: center;
+  svg {
+    font-size: 28px;
+    color: ${({ theme }) => theme.colors.gold};
   }
+`
 
-  & span,
+const ItemContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
   a {
-    word-break: break-all;
+    color: ${({ theme }) => theme.colors.gold};
+    text-decoration: none;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
   }
+`
+
+const ItemTitle = styled(Text)`
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.default};
+`
+
+const ItemValue = styled(Text)`
+  word-break: break-word;
 `
 
 export function Contact() {
   return (
     <PageLayout title="聯絡我們" description={description} disableCta>
-      <ContactContainer>
-        <ContactDetail>
-          <Header>聯絡我們</Header>
-          <ContactDetailsCardContainer>
-            <ContactDetailsCard>
-              {/* <StyledAvastar /> */}
-              <ContactTextContainer>
-                <MdOutlineEmail />
-                <Text fontSize="subtitle" color="gold">
-                  {email}
-                </Text>
-              </ContactTextContainer>
-              <ContactTextContainer>
-                <MdOutlinePhoneAndroid />
-                <Text fontSize="subtitle" color="gold">
-                  {phoneNumber}
-                </Text>
-              </ContactTextContainer>
-              <ContactTextContainer>
-                <MdOutlineFacebook />
-                <a href={facebookLink}>
-                  <Text fontSize="subtitle" color="gold" component="span">
-                    金星殯儀服務
-                  </Text>
+      <HeroSection>
+        <div style={{ textAlign: 'center', padding: '0 20px' }}>
+          <HeroTitle whiteColor disableUnderline>聯絡我們</HeroTitle>
+          <HeroSubtitle fontSize="h6">
+            我們提供24小時專業諮詢服務，隨時為您解答疑問及提供協助
+          </HeroSubtitle>
+        </div>
+      </HeroSection>
+
+      <MainContainer>
+        <InfoSection>
+          <div>
+            <SectionTitle component="h2" fontSize="h3">
+              聯絡方式
+            </SectionTitle>
+            <IntroText fontSize="body1">
+              無論您需要即時支援、諮詢服務詳情或獲取報價，我們經驗豐富的團隊都準備好隨時為您服務。
+            </IntroText>
+          </div>
+
+          <ContactItem>
+            <IconWrapper>
+              <MdOutlinePhoneAndroid />
+            </IconWrapper>
+            <ItemContent>
+              <ItemTitle fontSize="h6">24小時服務熱線</ItemTitle>
+              <ItemValue fontSize="body1">
+                <a href={`tel:${phoneNumber.replace(/\\s+/g, '')}`}>{phoneNumber}</a>
+              </ItemValue>
+            </ItemContent>
+          </ContactItem>
+
+          <ContactItem>
+            <IconWrapper>
+              <FaWhatsapp />
+            </IconWrapper>
+            <ItemContent>
+              <ItemTitle fontSize="h6">WhatsApp 查詢</ItemTitle>
+              <ItemValue fontSize="body1">
+                <a href={`https://wa.me/852${whatsapp || '93810003'}`} target="_blank" rel="noopener noreferrer">
+                  {whatsapp || '9381 0003'}
                 </a>
-              </ContactTextContainer>
-            </ContactDetailsCard>
-            <ContactDetailsCard>
-              <ContactForm />
-            </ContactDetailsCard>
-          </ContactDetailsCardContainer>
-        </ContactDetail>
-        <ContactBgImage src="/contact.jpg" />
-      </ContactContainer>
+              </ItemValue>
+            </ItemContent>
+          </ContactItem>
+
+          <ContactItem>
+            <IconWrapper>
+              <MdOutlineEmail />
+            </IconWrapper>
+            <ItemContent>
+              <ItemTitle fontSize="h6">電郵地址</ItemTitle>
+              <ItemValue fontSize="body1">
+                <a href={`mailto:${email}`}>{email}</a>
+              </ItemValue>
+            </ItemContent>
+          </ContactItem>
+
+          <ContactItem>
+            <IconWrapper>
+              <MdOutlineFacebook />
+            </IconWrapper>
+            <ItemContent>
+              <ItemTitle fontSize="h6">Facebook 專頁</ItemTitle>
+              <ItemValue fontSize="body1">
+                <a href={facebookLink} target="_blank" rel="noopener noreferrer">
+                  金星殯儀服務
+                </a>
+              </ItemValue>
+            </ItemContent>
+          </ContactItem>
+        </InfoSection>
+
+        <FormSection>
+          <FormSectionTitle component="h2" fontSize="h3">
+            網上查詢
+          </FormSectionTitle>
+          <ContactForm />
+        </FormSection>
+      </MainContainer>
     </PageLayout>
   )
 }

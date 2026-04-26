@@ -90,7 +90,7 @@ const BannerImage = styled.img`
   object-fit: cover;
 `
 
-export function Index() {
+export function Index({ reports = [] }: any) {
   return (
     <PageLayout
       description={sellPoints[0].content}
@@ -107,9 +107,28 @@ export function Index() {
       </Container>
       <SellingPointsSection />
       <TestimonySlides />
-      <MediaReportCarousel />
+      <MediaReportCarousel reports={reports} />
     </PageLayout>
   )
+}
+
+export async function getStaticProps() {
+  const fs = require('fs')
+  const matter = require('gray-matter')
+  const safeJsonStringify = require('safe-json-stringify')
+
+  const filesInMedia = fs.readdirSync('./_posts/media/')
+  const reports = filesInMedia.map((filename: string) => {
+    const file = fs.readFileSync(`./_posts/media/${filename}`, 'utf8')
+    const matterData = matter(file)
+    return JSON.parse(safeJsonStringify(matterData.data))
+  })
+
+  return {
+    props: {
+      reports,
+    },
+  }
 }
 
 export default Index

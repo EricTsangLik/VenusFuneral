@@ -22,27 +22,27 @@ const BlogCardsWrapper = styled.div`
   }
 `;
 
-const KnowledgesPage: NextPage = ({ blogs }: any) => {
-  const pageTitle = "殯儀知識 | Venus Funeral 殯儀服務";
-  const pageDescription = "Venus Funeral 提供全面的殯儀知識、帛金常識、殯儀習俗及守夜守考等實用資訊，協助您了解香港各類喪葬禮儀。";
+const MediaPage: NextPage = ({ media }: any) => {
+  const pageTitle = "傳媒報導 | Venus Funeral 殯儀服務";
+  const pageDescription = "了解 Venus Funeral 金星殯儀的傳媒報導與社會貢獻，閱讀各大媒體的專題訪問，讓您對我們有更深認識。";
 
   return (
-    <PageLayout title="殯儀知識">
+    <PageLayout title="傳媒報導">
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <meta name="keywords" content="殯儀知識, 帛金, 喪葬習俗, 香港殯儀, 喪禮禮儀" />
+        <meta name="keywords" content="傳媒報導, 殯儀業訪問, Venus Funeral 訪問" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
         <meta property="og:type" content="website" />
       </Head>
       <Container>
-        <Header>殯儀知識</Header>
+        <Header>傳媒報導</Header>
         <BlogCardsWrapper>
           {
-            blogs && blogs.map(({ thumbnail, title }, idx) => (
+            media && media.map(({ thumbnail, title, id }, idx) => (
               <BlogCard
-                href={`/knowledges/${encodeURIComponent(title)}`}
+                href={`/media/${encodeURIComponent(id)}`}
                 thumbnail={thumbnail}
                 title={title}
                 key={idx}
@@ -56,19 +56,23 @@ const KnowledgesPage: NextPage = ({ blogs }: any) => {
 };
 
 export async function getStaticProps() {
-  const filesInBlogs = fs.readdirSync('./_posts/blog/');
+  const filesInMedia = fs.readdirSync('./_posts/media/');
 
-  const blogs = filesInBlogs.map((filename) => {
-    const file = fs.readFileSync(`./_posts/blog/${filename}`, 'utf8');
+  const media = filesInMedia.map((filename) => {
+    const file = fs.readFileSync(`./_posts/media/${filename}`, 'utf8');
     const matterData = matter(file);
-    return JSON.parse(safeJsonStringify(matterData.data));
+    const parsedData = JSON.parse(safeJsonStringify(matterData.data));
+    return {
+      ...parsedData,
+      id: filename.replace('.md', ''),
+    };
   });
 
   return {
     props: {
-      blogs,
+      media,
     },
   };
 }
 
-export default KnowledgesPage;
+export default MediaPage;

@@ -2,17 +2,22 @@ import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Keyboard, Pagination, Navigation } from 'swiper';
 import Container from '../container/container';
-import { attributes } from '../../../../../content/mediaReports.md';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import React, { useState } from 'react';
-import { idText } from 'typescript';
 import IconButton from '../icon-button/icon-button';
 import Text from '../text/text';
 
-const { reports }: any = attributes;
+export interface MediaReport {
+  link: string;
+  thumbnail: string;
+  quote: string;
+  header: string;
+}
 
 /* eslint-disable-next-line */
-export interface MediaReportCarouselProps {}
+export interface MediaReportCarouselProps {
+  reports?: MediaReport[];
+}
 
 const StyledMediaReportCarousel = styled(Container)`
   overflow: visible;
@@ -112,7 +117,7 @@ const Header = styled(Text)`
   margin-top: 32px;
 `
 
-export const MediaReportCarousel = React.memo(() => {
+export const MediaReportCarousel = React.memo(({ reports = [] }: MediaReportCarouselProps) => {
   const [swiper, setSwiper] = useState<any>();
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [show, setShow] = useState(true);

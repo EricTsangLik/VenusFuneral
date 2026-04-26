@@ -18,6 +18,34 @@ const StyledInput = styled.input`
   height: 48px;
 `
 
+const StyledSelectWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  
+  &::after {
+    content: "▼";
+    font-size: 12px;
+    color: ${({ theme }) => theme.colors.gold};
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+`
+
+const StyledSelect = styled.select`
+  ${textFieldCommonStyles}
+  height: 48px;
+  background-color: white;
+  appearance: none;
+  cursor: pointer;
+  
+  &:invalid {
+    color: #757575;
+  }
+`
+
 const StyledTextarea = styled.textarea`
   ${textFieldCommonStyles}
   padding-top: 12px;
@@ -58,6 +86,26 @@ const ContactForm: React.FC = () => {
   const [submitted, setSubmitted] = useState(false)
   const [hasErr, setHasErr] = useState(false)
 
+  const SERVICE_OPTIONS = [
+    '醫院出殯',
+    '綠色殯儀',
+    '道教喪禮',
+    '佛教喪禮',
+    '基督教喪禮',
+    '天主教喪禮',
+    '維新教喪禮',
+    '土葬',
+    '佛教密宗',
+    '創價學會',
+    '鶴佬喪禮',
+    '潮洲喪禮',
+    '福建喪禮',
+    '水上人喪禮',
+    '兇宅/遺宅清潔',
+    '私人骨灰龕代理',
+    '其他 / 一般查詢'
+  ];
+
   const handleSubmit = async (e: any) => {
     e.preventDefault()
 
@@ -69,6 +117,7 @@ const ContactForm: React.FC = () => {
           "form-name": e.target.getAttribute("name"),
           name: e.target.name.value,
           contactNo: e.target.contactNo.value,
+          serviceType: e.target.serviceType.value,
           message: e.target.message.value,
         }),
       })
@@ -88,6 +137,14 @@ const ContactForm: React.FC = () => {
       <input type="hidden" name="form-name" value="contact" />
       <StyledInput name="name" type="text" placeholder="聯絡人姓名" required />
       <StyledInput name="contactNo" type="text" placeholder="聯絡電話" required />
+      <StyledSelectWrapper>
+        <StyledSelect name="serviceType" defaultValue="" required>
+          <option value="" disabled hidden>選擇查詢服務類型</option>
+          {SERVICE_OPTIONS.map((service) => (
+            <option key={service} value={service}>{service}</option>
+          ))}
+        </StyledSelect>
+      </StyledSelectWrapper>
       <StyledTextarea name="message" placeholder="內容" rows={7} required />
       <Button type="submit" isButton href="" variant="contained">傳送</Button>
     </StyledForm>
