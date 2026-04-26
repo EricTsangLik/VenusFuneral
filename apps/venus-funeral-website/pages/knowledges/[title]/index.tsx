@@ -45,7 +45,7 @@ const KnowledgeBlog = ({ data }) => {
 }
 
 export async function getStaticProps({ params: { title } }) {
-  const filesInBlogs = fs.readdirSync('./_posts/blog/')
+  const filesInBlogs = fs.readdirSync('./_posts/blog/').filter(file => file.endsWith('.md'))
   let data: any;
   for (const filename of filesInBlogs) {
     const file = fs.readFileSync(`./_posts/blog/${filename}`, 'utf8')
@@ -68,7 +68,7 @@ export async function getStaticProps({ params: { title } }) {
 }
 
 export async function getStaticPaths() {
-  const filesInBlogs = fs.readdirSync('./_posts/blog/')
+  const filesInBlogs = fs.readdirSync('./_posts/blog/').filter(file => file.endsWith('.md'))
 
   const paths = filesInBlogs.map((filename) => {
     const file = fs.readFileSync(`./_posts/blog/${filename}`, 'utf8')

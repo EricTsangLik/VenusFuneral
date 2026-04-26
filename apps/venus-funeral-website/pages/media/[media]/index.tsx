@@ -21,7 +21,7 @@ const MediaReport = ({ data }) => {
 }
 
 export async function getStaticProps({ params: { media } }) {
-  const filesInMedia = fs.readdirSync('./_posts/media/')
+  const filesInMedia = fs.readdirSync('./_posts/media/').filter(file => file.endsWith('.md'))
   let data: any;
   
   for (const filename of filesInMedia) {
@@ -46,7 +46,7 @@ export async function getStaticProps({ params: { media } }) {
 }
 
 export async function getStaticPaths() {
-  const filesInMedia = fs.readdirSync('./_posts/media/')
+  const filesInMedia = fs.readdirSync('./_posts/media/').filter(file => file.endsWith('.md'))
 
   const paths = filesInMedia.map((filename) => {
     return {

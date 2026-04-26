@@ -56,7 +56,7 @@ const KnowledgesPage: NextPage = ({ blogs }: any) => {
 };
 
 export async function getStaticProps() {
-  const filesInBlogs = fs.readdirSync('./_posts/blog/');
+  const filesInBlogs = fs.readdirSync('./_posts/blog/').filter(file => file.endsWith('.md'));
 
   const blogs = filesInBlogs.map((filename) => {
     const file = fs.readFileSync(`./_posts/blog/${filename}`, 'utf8');

@@ -50,11 +50,11 @@ const ContentWrapper = styled.div`
     font-size: 2rem;
     margin-top: 3rem;
     margin-bottom: 1.5rem;
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.gold};
   }
   
   blockquote {
-    border-left: 4px solid ${({ theme }) => theme.colors.primary};
+    border-left: 4px solid ${({ theme }) => theme.colors.gold};
     padding-left: 20px;
     font-style: italic;
     font-size: 1.3rem;

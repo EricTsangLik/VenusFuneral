@@ -135,7 +135,7 @@ export async function getStaticProps() {
   const matter = require('gray-matter')
   const safeJsonStringify = require('safe-json-stringify')
 
-  const filesInMedia = fs.readdirSync('./_posts/media/')
+  const filesInMedia = fs.readdirSync('./_posts/media/').filter(file => file.endsWith('.md'))
   const reports = filesInMedia.map((filename: string) => {
     const file = fs.readFileSync(`./_posts/media/${filename}`, 'utf8')
     const matterData = matter(file)

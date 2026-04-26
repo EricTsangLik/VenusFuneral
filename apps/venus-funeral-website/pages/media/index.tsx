@@ -56,7 +56,7 @@ const MediaPage: NextPage = ({ media }: any) => {
 };
 
 export async function getStaticProps() {
-  const filesInMedia = fs.readdirSync('./_posts/media/');
+  const filesInMedia = fs.readdirSync('./_posts/media/').filter(file => file.endsWith('.md'));
 
   const media = filesInMedia.map((filename) => {
     const file = fs.readFileSync(`./_posts/media/${filename}`, 'utf8');
