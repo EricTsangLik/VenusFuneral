@@ -1,7 +1,7 @@
 # Netlify Configuration for Venus Funeral Website
 
 [build]
-  command = "yarn build venus-funeral-website"
+  command = "yarn build venus-funeral-website --skip-nx-cache"
   publish = "dist/apps/venus-funeral-website/.next"
 
 [[plugins]]
