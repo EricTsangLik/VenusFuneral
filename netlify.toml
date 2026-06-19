@@ -8,7 +8,7 @@
   package = "@netlify/plugin-nextjs"
 
 [build.environment]
-  NODE_VERSION = "16"
+  NODE_VERSION = "18"
   YARN_VERSION = "1.22.19"
 
 # Removed SPA redirect to allow Next.js SSR to handle routing

@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next';
-import { getAllKeytomicBlogsForSitemap } from '../../lib/keytomic';
+import { getAllKeytomicBlogsForSitemap } from '../lib/keytomic';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
