@@ -1,7 +1,7 @@
 # Netlify Configuration for Venus Funeral Website
 
 [build]
-  command = "yarn build venus-funeral-website && cp -r dist/apps/venus-funeral-website/public/* dist/apps/venus-funeral-website/.next/ || true"
+  command = "yarn build venus-funeral-website"
   publish = "dist/apps/venus-funeral-website/.next"
 
 [[plugins]]
