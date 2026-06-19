@@ -1,18 +1,17 @@
 # Netlify Configuration for Venus Funeral Website
 
 [build]
-  command = "yarn build venus-funeral-website && node apps/venus-funeral-website/scripts/generate-sitemap.js && yarn nx run venus-funeral-website:export"
-  publish = "dist/apps/venus-funeral-website/exported"
+  command = "yarn build venus-funeral-website"
+  publish = "dist/apps/venus-funeral-website/.next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [build.environment]
   NODE_VERSION = "16"
   YARN_VERSION = "1.22.19"
 
-# Redirect all requests to index.html for client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Removed SPA redirect to allow Next.js SSR to handle routing
 
 # Headers for security and performance
 [[headers]]
