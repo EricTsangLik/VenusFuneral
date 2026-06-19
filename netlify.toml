@@ -1,8 +1,8 @@
 # Netlify Configuration for Venus Funeral Website
 
 [build]
-  command = "yarn --cwd VenusFuneral build venus-funeral-website"
-  publish = "VenusFuneral/dist/apps/venus-funeral-website/.next"
+  command = "yarn build venus-funeral-website"
+  publish = "dist/apps/venus-funeral-website/.next"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
