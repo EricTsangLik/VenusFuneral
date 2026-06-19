@@ -52,6 +52,7 @@ export function PageLayout({
     <>
       <Head>
         <title>{pageTitle}</title>
+        <link rel="icon" href="/favicon.ico" />
         <meta name="keywords" content="" />
         <meta name="description" content={pageDescription} />
         {/*Facebook SEO*/}
