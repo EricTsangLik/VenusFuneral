@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { keytomic } from '../../lib/keytomic'
@@ -83,11 +83,9 @@ export default function BlogIndex({ blogs, hasMore, nextCursor }: any) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const cursor = context.query.cursor as string | undefined;
-  
+export const getStaticProps: GetStaticProps = async () => {
   try {
-    const result = await keytomic.listBlogs(12, cursor);
+    const result = await keytomic.listBlogs(12);
     return {
       props: {
         blogs: result.data.data,

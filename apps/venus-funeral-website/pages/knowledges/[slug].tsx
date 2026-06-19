@@ -1,6 +1,6 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import Head from 'next/head'
-import { keytomic } from '../../lib/keytomic'
+import { keytomic, getAllKeytomicBlogsForSitemap } from '../../lib/keytomic'
 import styled from 'styled-components'
 
 const ArticleContainer = styled.article`
@@ -69,7 +69,27 @@ export default function BlogPost({ blog, siteUrl }: any) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  try {
+    const blogs = await getAllKeytomicBlogsForSitemap()
+    const paths = blogs.map((blog) => ({
+      params: { slug: blog.slug },
+    }))
+
+    return {
+      paths,
+      fallback: false,
+    }
+  } catch (error) {
+    console.error('Error fetching blog paths:', error)
+    return {
+      paths: [],
+      fallback: false,
+    }
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string
   
   try {

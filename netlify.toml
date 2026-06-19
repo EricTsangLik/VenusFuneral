@@ -1,7 +1,7 @@
 # Netlify Configuration for Venus Funeral Website
 
 [build]
-  command = "yarn build venus-funeral-website && yarn nx run venus-funeral-website:export"
+  command = "yarn build venus-funeral-website && node apps/venus-funeral-website/scripts/generate-sitemap.js && yarn nx run venus-funeral-website:export"
   publish = "dist/apps/venus-funeral-website/exported"
 
 [build.environment]
