@@ -17,6 +17,7 @@
   },
   "private": true,
   "dependencies": {
+    "@keytomic/sdk": "^0.4.4",
     "@nrwl/next": "14.1.9",
     "core-js": "^3.6.5",
     "gray-matter": "^4.0.3",

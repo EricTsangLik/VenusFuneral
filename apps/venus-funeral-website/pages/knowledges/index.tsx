@@ -1,74 +1,108 @@
-import { Container, Header, PageLayout, BlogCard } from '@venus-funeral/ui';
-import { NextPage } from 'next';
-import styled from 'styled-components';
-import React from 'react';
-import fs from 'fs';
-import matter from 'gray-matter';
-import safeJsonStringify from 'safe-json-stringify';
-import Head from 'next/head';
+import { GetServerSideProps } from 'next'
+import Head from 'next/head'
+import Link from 'next/link'
+import { keytomic } from '../../lib/keytomic'
+import styled from 'styled-components'
 
-const BlogCardsWrapper = styled.div`
+const BlogContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+`
+
+const BlogTitle = styled.h1`
+  text-align: center;
+  margin-bottom: 40px;
+`
+
+const BlogGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-column-gap: 32px;
-  grid-row-gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+`
 
-  ${({ theme }) => theme.breakPoints.tablet} {
-    grid-template-columns: repeat(2, 1fr);
+const BlogCard = styled.div`
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
+`
 
-  ${({ theme }) => theme.breakPoints.desktop} {
-    grid-template-columns: repeat(3, 1fr);
-  }
-`;
+const BlogImage = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+`
 
-const KnowledgesPage: NextPage = ({ blogs }: any) => {
-  const pageTitle = "殯儀知識 | Venus Funeral 殯儀服務";
-  const pageDescription = "Venus Funeral 提供全面的殯儀知識、帛金常識、殯儀習俗及守夜守考等實用資訊，協助您了解香港各類喪葬禮儀。";
+const BlogContent = styled.div`
+  padding: 20px;
+`
 
+const BlogExcerpt = styled.p`
+  color: #666;
+  font-size: 14px;
+`
+
+const ReadMore = styled.a`
+  display: inline-block;
+  margin-top: 10px;
+  color: #0070f3;
+  text-decoration: none;
+  font-weight: bold;
+`
+
+export default function BlogIndex({ blogs, hasMore, nextCursor }: any) {
   return (
-    <PageLayout title="殯儀知識">
+    <>
       <Head>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta name="keywords" content="殯儀知識, 帛金, 喪葬習俗, 香港殯儀, 喪禮禮儀" />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta property="og:type" content="website" />
+        <title>最新資訊與文章 | 金星殯儀服務</title>
+        <meta name="description" content="瀏覽金星殯儀服務的最新資訊與文章" />
       </Head>
-      <Container>
-        <Header>殯儀知識</Header>
-        <BlogCardsWrapper>
-          {
-            blogs && blogs.map(({ thumbnail, title }, idx) => (
-              <BlogCard
-                href={`/knowledges/${encodeURIComponent(title)}`}
-                thumbnail={thumbnail}
-                title={title}
-                key={idx}
-              />
-            ))
-          }
-        </BlogCardsWrapper>
-      </Container>
-    </PageLayout>
-  );
-};
-
-export async function getStaticProps() {
-  const filesInBlogs = fs.readdirSync('./_posts/blog/').filter(file => file.endsWith('.md'));
-
-  const blogs = filesInBlogs.map((filename) => {
-    const file = fs.readFileSync(`./_posts/blog/${filename}`, 'utf8');
-    const matterData = matter(file);
-    return JSON.parse(safeJsonStringify(matterData.data));
-  });
-
-  return {
-    props: {
-      blogs,
-    },
-  };
+      <BlogContainer>
+        <BlogTitle>最新資訊與文章</BlogTitle>
+        <BlogGrid>
+          {blogs?.map((blog: any) => (
+            <BlogCard key={blog.id}>
+              {blog.coverImageUrl && <BlogImage src={blog.coverImageUrl} alt={blog.title} />}
+              <BlogContent>
+                <h3>{blog.title}</h3>
+                <BlogExcerpt>{blog.excerpt}</BlogExcerpt>
+                <Link href={`/knowledges/${blog.slug}`} passHref>
+                  <ReadMore>閱讀更多</ReadMore>
+                </Link>
+              </BlogContent>
+            </BlogCard>
+          ))}
+        </BlogGrid>
+      </BlogContainer>
+    </>
+  )
 }
 
-export default KnowledgesPage;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cursor = context.query.cursor as string | undefined;
+  
+  try {
+    const result = await keytomic.listBlogs(12, cursor);
+    return {
+      props: {
+        blogs: result.data.data,
+        hasMore: result.data.pageInfo.hasMore,
+        nextCursor: result.data.pageInfo.nextCursor || null,
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+    return {
+      props: {
+        blogs: [],
+        hasMore: false,
+        nextCursor: null,
+      }
+    }
+  }
+}

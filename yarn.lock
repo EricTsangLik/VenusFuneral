@@ -1368,6 +1368,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@keytomic/sdk@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@keytomic/sdk/-/sdk-0.4.4.tgz#3a94a118c8f06f86918114ff7cac14b82c6484a7"
+  integrity sha512-fEkqTkR6XbSokm1Nz+ebyhhJZFpsVYC866PCe6T8s/d9U2it2nPgmsv4bPitWr0rvzCMFkmFYavpK0zkkd3XEw==
+
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
