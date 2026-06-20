@@ -60,7 +60,7 @@ export default function BlogPost({ blog, siteUrl }: any) {
       </Head>
       
       <ArticleContainer>
-        <Title>{blog.title}</Title>
+        <Title className="blog-title h1">{blog.title}</Title>
         {blog.coverImageUrl && <CoverImage src={blog.coverImageUrl} alt={blog.title} />}
         
         <div className="blog-content" dangerouslySetInnerHTML={{ __html: blog.html }} />
