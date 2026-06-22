@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Container, PageLayout, Text, transformCloundinaryImage } from '@venus-funeral/ui';
 import Moment from 'react-moment';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const PremiumBanner = styled.div<{ bgImage: string }>`
   width: 100%;
@@ -75,9 +76,11 @@ const ContentContainer = styled(Container)`
 `;
 
 const KnowledgePremiumLayout = ({ data, children }: any) => {
+  const router = useRouter();
   const bannerImage = data.thumbnail ? transformCloundinaryImage(data.thumbnail, 1920) : '';
   const metaDescription = data.description || data.content?.substring(0, 160) || '殯儀知識';
   const ogImageUrl = data.thumbnail ? transformCloundinaryImage(data.thumbnail, 1200) : '';
+  const canonicalUrl = `https://venusfuneralservice.com${router.asPath}`;
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -89,7 +92,7 @@ const KnowledgePremiumLayout = ({ data, children }: any) => {
     "author": {
       "@type": "Organization",
       "name": "Venus Funeral",
-      "url": "https://www.venusfuneral.com"
+      "url": "https://venusfuneralservice.com"
     }
   };
 
@@ -102,6 +105,7 @@ const KnowledgePremiumLayout = ({ data, children }: any) => {
       <Head>
         <title>{data.title} | Venus Funeral 殯儀知識</title>
         <meta name="description" content={metaDescription} />
+        <link rel="canonical" href={canonicalUrl} />
         {data.keywords && <meta name="keywords" content={data.keywords} />}
         
         {/* Open Graph / Facebook */}

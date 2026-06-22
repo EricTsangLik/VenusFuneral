@@ -104,7 +104,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return {
       props: {
         blog,
-        siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.venusfuneralservice.com',
+        siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://venusfuneralservice.com',
       }
     }
   } catch (error) {

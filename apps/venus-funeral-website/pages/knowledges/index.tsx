@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { keytomic } from '../../lib/keytomic'
 import styled from 'styled-components'
 
@@ -56,11 +57,15 @@ const ReadMore = styled.a`
 `
 
 export default function BlogIndex({ blogs, hasMore, nextCursor }: any) {
+  const router = useRouter();
+  const canonicalUrl = `https://venusfuneralservice.com${router.asPath}`;
+
   return (
     <>
       <Head>
         <title>最新資訊與文章 | 金星殯儀服務</title>
         <meta name="description" content="瀏覽金星殯儀服務的最新資訊與文章" />
+        <link rel="canonical" href={canonicalUrl} />
       </Head>
       <BlogContainer>
         <BlogTitle>最新資訊與文章</BlogTitle>

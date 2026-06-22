@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { PropsWithChildren } from 'react';
 import { ImWhatsapp } from 'react-icons/im';
 import Navbar from '../navbar/navbar';
@@ -44,15 +45,18 @@ export function PageLayout({
   children,
   thumbnail
 }: PropsWithChildren<PageLayoutProps>) {
+  const router = useRouter();
   const pageTitle = `${title ? title + ' | ' : ''}金星殯儀`
   const pageDescription = description || companyIntro
   const pageThumbnail = thumbnail || (Logo as any).src
+  const canonicalUrl = `https://venusfuneralservice.com${router.asPath === '/' ? '' : router.asPath}`;
 
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta name="keywords" content="" />
         <meta name="description" content={pageDescription} />
         {/*Facebook SEO*/}

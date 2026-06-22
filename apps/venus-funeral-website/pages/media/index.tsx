@@ -6,6 +6,7 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import safeJsonStringify from 'safe-json-stringify';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 const BlogCardsWrapper = styled.div`
   display: grid;
@@ -23,14 +24,17 @@ const BlogCardsWrapper = styled.div`
 `;
 
 const MediaPage: NextPage = ({ media }: any) => {
+  const router = useRouter();
   const pageTitle = "傳媒報導 | Venus Funeral 殯儀服務";
   const pageDescription = "了解 Venus Funeral 金星殯儀的傳媒報導與社會貢獻，閱讀各大媒體的專題訪問，讓您對我們有更深認識。";
+  const canonicalUrl = `https://venusfuneralservice.com${router.asPath}`;
 
   return (
     <PageLayout title="傳媒報導">
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={canonicalUrl} />
         <meta name="keywords" content="傳媒報導, 殯儀業訪問, Venus Funeral 訪問" />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
