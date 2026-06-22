@@ -1,0 +1,19 @@
+# Allow all standard search engines (Crucial for Keytomic's IndexNow & GSC auto-indexing)
+User-agent: *
+Allow: /
+
+# Explicitly allow AI bots for Generative Engine Optimization (GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Point Keytomic and search engines to your dynamic sitemap
+Sitemap: https://venusfuneralservice.com/sitemap.xml

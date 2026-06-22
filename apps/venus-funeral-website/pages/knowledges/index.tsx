@@ -91,7 +91,11 @@ export const getStaticProps: GetStaticProps = async () => {
         blogs: result.data.data,
         hasMore: result.data.pageInfo.hasMore,
         nextCursor: result.data.pageInfo.nextCursor || null,
-      }
+      },
+      // Next.js will attempt to re-generate the page:
+      // - When a request comes in
+      // - At most once every 60 seconds (you can adjust this number)
+      revalidate: 60, 
     }
   } catch (error) {
     console.error('Error fetching blogs:', error);
@@ -100,7 +104,8 @@ export const getStaticProps: GetStaticProps = async () => {
         blogs: [],
         hasMore: false,
         nextCursor: null,
-      }
+      },
+      revalidate: 60,
     }
   }
 }
