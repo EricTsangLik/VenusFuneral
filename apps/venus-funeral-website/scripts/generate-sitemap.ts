@@ -7,7 +7,7 @@ import { getAllKeytomicBlogsForSitemap } from '../lib/keytomic';
 import dotenv from 'dotenv';
 dotenv.config({ path: path.resolve(__dirname, '../.env.local') });
 
-const BASE_URL = 'https://www.venusfuneralservice.com';
+const BASE_URL = 'https://venusfuneralservice.com';
 
 async function generateSitemap() {
   const staticPages = [
