@@ -105,12 +105,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       props: {
         blog,
         siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://venusfuneralservice.com',
-      }
+      },
+      revalidate: 60,
     }
   } catch (error) {
     console.error('Error fetching blog post:', error)
     return {
       notFound: true,
+      revalidate: 60,
     }
   }
 }
