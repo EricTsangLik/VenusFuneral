@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -88,7 +88,7 @@ export default function BlogIndex({ blogs, hasMore, nextCursor }: any) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const result = await keytomic.listBlogs(12);
     return {
@@ -97,10 +97,6 @@ export const getStaticProps: GetStaticProps = async () => {
         hasMore: result.data.pageInfo.hasMore,
         nextCursor: result.data.pageInfo.nextCursor || null,
       },
-      // Next.js will attempt to re-generate the page:
-      // - When a request comes in
-      // - At most once every 60 seconds (you can adjust this number)
-      revalidate: 60, 
     }
   } catch (error) {
     console.error('Error fetching blogs:', error);
@@ -110,7 +106,6 @@ export const getStaticProps: GetStaticProps = async () => {
         hasMore: false,
         nextCursor: null,
       },
-      revalidate: 60,
     }
   }
 }
