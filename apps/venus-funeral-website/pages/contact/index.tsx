@@ -14,7 +14,7 @@ import { FaWhatsapp } from 'react-icons/fa'
 import ContactForm from '../../components/ContactForm'
 import { attributes } from '../../../../content/contactus.md'
 
-const { phoneNumber, email, facebookLink, description, whatsapp } = attributes
+const { phoneNumber, email, facebookLink, whatsapp } = attributes
 
 const HeroSection = styled.div`
   position: relative;
@@ -155,7 +155,12 @@ const ItemValue = styled(Text)`
 
 export function Contact() {
   return (
-    <PageLayout title="聯絡我們" description={description} disableCta>
+    <PageLayout
+      title="聯絡我們"
+      seoTitle="聯絡金星殯儀 | WhatsApp、電話及網上查詢"
+      description="如需殯儀服務、喪禮安排、兇宅清潔或骨灰龕位查詢，可透過電話、WhatsApp 或網上表格聯絡金星殯儀，我們提供全日諮詢支援，盡快回覆您的需要。"
+      disableCta
+    >
       <HeroSection>
         <div style={{ textAlign: 'center', padding: '0 20px' }}>
           <HeroTitle whiteColor disableUnderline>聯絡我們</HeroTitle>

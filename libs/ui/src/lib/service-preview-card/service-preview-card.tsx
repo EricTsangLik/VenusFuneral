@@ -55,9 +55,9 @@ export function ServicePreviewCard({
 }: ServicePreviewCardProps) {
   return (
     <Link href={`/services/${serviceName}`}>
-      <a>
+      <a aria-label={`了解${serviceName}服務`}>
         <StyledServicePreviewCard thumbnail={transformCloundinaryImage(thumbnail, 400)}>
-          <StyledText color="white" fontSize="h5" component="label">
+          <StyledText color="white" fontSize="h5" component="span">
             {serviceName}
           </StyledText>
         </StyledServicePreviewCard>

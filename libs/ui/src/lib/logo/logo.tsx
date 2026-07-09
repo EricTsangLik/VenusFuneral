@@ -25,7 +25,7 @@ const StyledLogo = styled.div`
 
 export function Logo({ className }: LogoProps) {
   return (
-    <StyledLogo className={className}>
+    <StyledLogo className={className} aria-hidden="true">
       <LogoIcon />
     </StyledLogo>
   );

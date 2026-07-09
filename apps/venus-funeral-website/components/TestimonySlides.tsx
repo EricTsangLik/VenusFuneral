@@ -54,7 +54,7 @@ const TestimonySlides: React.FC = () => {
   return (
     <Wrapper slideCount={testimonies && testimonies.length}>
       <Container>
-        <Header whiteColor disableUnderline>
+        <Header component="h2" whiteColor disableUnderline>
           客戶見證
         </Header>
       </Container>

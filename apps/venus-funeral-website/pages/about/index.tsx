@@ -99,7 +99,11 @@ const OutterWrapper = styled.div`
 const AboutusPage: NextPage = ({ reports = [] }: any) => {
   console.log('mount')
   return (
-    <PageLayout title="關於我們" description={companyIntro}>
+    <PageLayout
+      title="關於我們"
+      seoTitle="關於金星殯儀 | 香港祖傳殯儀服務與青年團隊"
+      description="金星殯儀為祖傳家業，由青年團隊傳承，致力提供專業貼心的一站式殯儀服務，協助家屬辦理繁複文件、籌辦個人化喪禮，並於悲傷時刻陪伴同行，令您放心。"
+    >
       <TextBanner
         header="我們的故事"
         content={companyIntro}
@@ -108,11 +112,11 @@ const AboutusPage: NextPage = ({ reports = [] }: any) => {
       <Fade delay={600}>
         <OutterWrapper>
           <OwnerContainer>
-            <OwnerImage src="https://res.cloudinary.com/djblau8at/image/upload/v1763100154/%E5%89%B5%E8%BE%A6%E4%BA%BA%E8%BD%89%E5%B0%81%E9%9D%A2_cxbxus.jpg" alt="Owner Image" />
+            <OwnerImage src="https://res.cloudinary.com/djblau8at/image/upload/v1763100154/%E5%89%B5%E8%BE%A6%E4%BA%BA%E8%BD%89%E5%B0%81%E9%9D%A2_cxbxus.jpg" alt="金星殯儀創辦人" />
             <OwnerTextWrapper>
               <StyledHeader
                 disableUnderline
-                component="h6"
+                component="h2"
                 fontSize="h3"
                 color="inherit"
               >

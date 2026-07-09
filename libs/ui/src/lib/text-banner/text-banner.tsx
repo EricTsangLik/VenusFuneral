@@ -139,7 +139,7 @@ export function TextBanner({
           <Slide left delay={500}>
             <Fade delay={500}>
               <TextWrapper>
-                <StyledHeader component="h6" fontSize="h3">{header}</StyledHeader>
+                <StyledHeader component="h1" fontSize="h3">{header}</StyledHeader>
               <Text component="p" fontSize="subtitle">{content}</Text>
               </TextWrapper>
             </Fade>
@@ -147,7 +147,7 @@ export function TextBanner({
         </OurStoryWrapper>
         <ImageWrapper>
           <Fade>
-            <BannerImage src={imageSrc} alt="banner image" />
+            <BannerImage src={imageSrc} alt={header || '頁面橫幅圖片'} />
           </Fade>
         </ImageWrapper>
       </StyledBannerWrapper>

@@ -5,13 +5,16 @@ import { PropsWithChildren } from 'react';
 import { ImWhatsapp } from 'react-icons/im';
 import Navbar from '../navbar/navbar';
 import Footer, { FooterProps } from '../footer/footer';
-import { attributes } from '../../../../../content/aboutus.md'
 import Logo from '../../assets/thumbnail.png'
 
-const { companyIntro } = attributes
+const DEFAULT_DESCRIPTION =
+  '金星殯儀提供香港一站式殯儀服務、喪禮安排、文件代辦及哀傷支援。'
+
 /* eslint-disable-next-line */
 export interface PageLayoutProps extends FooterProps {
   title?: string;
+  /** Full document title; when set, skips the default `| 金星殯儀` suffix. */
+  seoTitle?: string;
   description?: string;
   thumbnail?: string;
 }
@@ -40,14 +43,15 @@ const WhatsappFab = styled.a`
 
 export function PageLayout({
   title,
+  seoTitle,
   description,
   disableCta,
   children,
   thumbnail
 }: PropsWithChildren<PageLayoutProps>) {
   const router = useRouter();
-  const pageTitle = `${title ? title + ' | ' : ''}金星殯儀`
-  const pageDescription = description || companyIntro
+  const pageTitle = seoTitle || `${title ? title + ' | ' : ''}金星殯儀`
+  const pageDescription = description || DEFAULT_DESCRIPTION
   const pageThumbnail = thumbnail || (Logo as any).src
   const canonicalUrl = `https://venusfuneralservice.com${router.asPath === '/' ? '' : router.asPath}`;
 
@@ -73,8 +77,13 @@ export function PageLayout({
         <meta name="twitter:image" content={pageThumbnail} />
       </Head>
       {children}
-      <WhatsappFab href={`whatsapp://send?phone=852${93810003}`}>
-        <ImWhatsapp color="#fff" fontSize={42} />
+      <WhatsappFab
+        href="https://wa.me/85293810003"
+        aria-label="WhatsApp 查詢金星殯儀"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <ImWhatsapp color="#fff" fontSize={42} aria-hidden="true" />
       </WhatsappFab>
       <Footer disableCta={disableCta} />
     </>

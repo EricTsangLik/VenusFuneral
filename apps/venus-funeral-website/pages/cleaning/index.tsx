@@ -27,7 +27,11 @@ const CleaningPage = () => {
   ];
 
   return (
-    <PageLayout title="兇宅/遺宅清潔">
+    <PageLayout
+      title="兇宅/遺宅清潔"
+      seoTitle="兇宅清潔及遺宅清理服務 | 香港專業清理 | 金星殯儀"
+      description="金星殯儀提供兇宅、遺宅及單位專業清理服務，協助家屬處理消毒、深層清潔、物品整理及後續安排，以尊重與專業態度完成善後工作，減輕家屬負擔與壓力。"
+    >
       <Container>
         {/* Hero Section */}
         <HeroSection>
@@ -398,12 +402,12 @@ const CleaningPage = () => {
               歡迎透過 WhatsApp 聯絡我們，我們會盡快回覆並提供詳細報價
             </ContactSubtitle>
             <WhatsAppButton href={whatsappLink} target="_blank" rel="noopener noreferrer">
-              <FaWhatsapp style={{ fontSize: '24px', marginRight: '12px' }} />
+              <FaWhatsapp style={{ fontSize: '24px', marginRight: '12px' }} aria-hidden="true" />
               WhatsApp 查詢
             </WhatsAppButton>
             <ContactInfo>
               <ContactInfoText component="p" fontSize="body1" color="white">
-                聯絡電話：+852 9831 0003
+                聯絡電話：+852 9381 0003
               </ContactInfoText>
             </ContactInfo>
           </ContactCard>

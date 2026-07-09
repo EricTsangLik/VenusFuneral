@@ -1,6 +1,5 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/alt-text */
 import React from 'react'
 import styled from 'styled-components';
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
@@ -60,7 +59,11 @@ const FlowerGridGallery: React.FC<FlowerGridGalleryProps> = React.memo(
               photoSrcs &&
               photoSrcs.map((it, idx) =>
                 <FlowerCard key={idx}>
-                  <img src={transformCloundinaryImage(it.src, 400)} key={idx} onClick={clickImageHandler(idx)} />
+                  <img
+                    src={transformCloundinaryImage(it.src, 400)}
+                    alt={it.flowerName ? `${it.flowerName}花牌` : `花牌款式 ${idx + 1}`}
+                    onClick={clickImageHandler(idx)}
+                  />
                   <FlowerDescription>
                     <Text color="default">{it.flowerName}</Text>
                     <Text color="default">${internationalNumberFormat.format(it.price)}</Text>

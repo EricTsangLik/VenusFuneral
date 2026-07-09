@@ -48,7 +48,7 @@ export const keytomic = {
   },
 }
 
-export async function getAllKeytomicBlogsForSitemap() {
+export async function listAllBlogs() {
   let allBlogs: any[] = []
   let cursor: string | undefined = undefined
   let hasMore = true
@@ -58,15 +58,21 @@ export async function getAllKeytomicBlogsForSitemap() {
       const result = await keytomic.listBlogs(50, cursor)
       const blogs = result.data.data
       const pageInfo = result.data.pageInfo
-      
+
       allBlogs = [...allBlogs, ...blogs]
       hasMore = pageInfo.hasMore
       cursor = pageInfo.nextCursor || undefined
     } catch (error) {
-      console.error('Error fetching blogs for sitemap:', error)
+      console.error('Error fetching blogs:', error)
       break
     }
   }
+
+  return allBlogs
+}
+
+export async function getAllKeytomicBlogsForSitemap() {
+  const allBlogs = await listAllBlogs()
 
   return allBlogs.map((blog) => ({
     slug: blog.slug,

@@ -112,7 +112,7 @@ export function Navbar(props: NavbarProps) {
     <StyledNavbar showBorder={showBorder}>
       <StyledContainer>
         <Link href="/">
-          <a style={{ zIndex: 100 }}>
+          <a style={{ zIndex: 100 }} aria-label="金星殯儀首頁">
             <Logo />
           </a>
         </Link>

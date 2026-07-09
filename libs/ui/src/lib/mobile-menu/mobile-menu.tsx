@@ -63,9 +63,11 @@ export function MobileMenu(props: MobileMenuProps) {
     <StyledMobileMenuWrapper>
       <MenuButton
         onClick={clickMenuHandler}
+        aria-label={open ? '關閉選單' : '開啟選單'}
+        aria-expanded={open}
       >
         {
-          open ? <MdOutlineClose /> : <MdMenu />
+          open ? <MdOutlineClose aria-hidden="true" /> : <MdMenu aria-hidden="true" />
         }
       </MenuButton>
       <Menu open={open}>

@@ -60,6 +60,8 @@ const ProcessesPage: NextPage = () => {
   return (
     <PageLayout
       title="服務流程"
+      seoTitle="香港殯儀服務流程 | 文件代辦及喪禮安排步驟"
+      description="了解金星殯儀完整服務流程，由初步聯絡諮詢、領取及代辦文件、喪禮儀式安排以至出殯及骨灰善後，專人逐步協助家屬妥善處理，減少繁瑣手續與不安情緒。"
     >
       <Container>
         <Header>服務流程</Header>

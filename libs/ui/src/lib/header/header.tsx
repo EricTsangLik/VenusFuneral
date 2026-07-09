@@ -5,7 +5,7 @@ import Text from '../text/text';
 /* eslint-disable-next-line */
 export interface HeaderProps {
   className?: string;
-  component?: 'h6' | 'h1'
+  component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   disableUnderline?: boolean;
   whiteColor?: boolean;
 }
@@ -44,7 +44,7 @@ const StyledHeader = styled(Text) <{ disableUnderline?: boolean, whiteColor?: bo
 export function Header({
   className,
   children,
-  component = 'h6',
+  component = 'h1',
   disableUnderline,
   whiteColor
 }: PropsWithChildren<HeaderProps>) {

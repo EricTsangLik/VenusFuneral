@@ -1,23 +1,17 @@
 import styled from 'styled-components'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import {
   PageLayout,
-  Navbar,
-  ServicePreviewCard,
   Container,
   MediaReportCarousel,
   transformCloundinaryImage,
   Text,
   Button,
 } from '@venus-funeral/ui'
-import {
-  attributes,
-  react as Content,
-} from '../../../content/serviceOverviews.md'
+import { attributes } from '../../../content/serviceOverviews.md'
 import TestimonySlides from '../components/TestimonySlides'
 import SellingPointsSection from '../components/SellingPointsSection'
 
-const { services, sellPoints, banner, missions } = attributes
+const { banner } = attributes
 
 const CardWrapper = styled.div`
   display: grid;
@@ -53,6 +47,9 @@ const Banner = styled.div`
 
 const BannerTextWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   position: absolute;
   width: 100%;
   justify-content: center;
@@ -60,6 +57,8 @@ const BannerTextWrapper = styled.div`
 
   & h1 {
     font-size: ${({ theme }) => theme.fontSize.h6};
+    margin: 0;
+    text-align: center;
   }
 
   & * {
@@ -67,11 +66,9 @@ const BannerTextWrapper = styled.div`
     letter-spacing: 4px;
   }
 
-  & > a {
-  }
-
   ${({ theme }) => theme.breakPoints.tablet} {
     bottom: 30px;
+    gap: 24px;
 
     & h1 {
       font-size: ${({ theme }) => theme.fontSize.h3};
@@ -93,12 +90,16 @@ const BannerImage = styled.img`
 export function Index({ reports = [] }: any) {
   return (
     <PageLayout
-      description={sellPoints[0].content}
+      seoTitle="金星殯儀 | 香港一站式殯儀服務、喪禮安排及文件代辦"
+      description="金星殯儀提供香港一站式殯儀服務，涵蓋喪禮安排、文件代辦、火化土葬及哀傷支援，由經驗豐富的專人協助家屬妥善處理身後事每一個步驟，讓您更放心安心。"
     >
       <Container>
         <Banner>
-          <BannerImage src={transformCloundinaryImage(banner, 1440)} />
+          <BannerImage src={transformCloundinaryImage(banner, 1440)} alt="金星殯儀服務" />
           <BannerTextWrapper>
+            <Text component="h1" fontSize="h2" color="white">
+              金星殯儀服務
+            </Text>
             <Button href="/services" variant="contained">
               查看服務
             </Button>

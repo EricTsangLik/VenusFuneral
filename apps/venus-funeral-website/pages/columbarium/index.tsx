@@ -25,7 +25,11 @@ const ColumbariumPage = () => {
   ];
 
   return (
-    <PageLayout title="骨灰罈位買賣">
+    <PageLayout
+      title="骨灰罈位買賣"
+      seoTitle="香港骨灰龕位買賣及安置諮詢 | 金星殯儀"
+      description="金星殯儀協助家屬了解香港骨灰龕位及私人龕位買賣，提供安置選項、買賣代理及相關注意事項諮詢，讓骨灰善後安排更清晰安心，減少繁複手續與疑慮不安。"
+    >
       <Container>
         {/* Hero Section */}
         <HeroSection>
@@ -156,12 +160,12 @@ const ColumbariumPage = () => {
               歡迎透過 WhatsApp 聯絡我們，我們會盡快回覆並提供詳細資料
             </ContactSubtitle>
             <WhatsAppButton href={whatsappLink} target="_blank" rel="noopener noreferrer">
-              <FaWhatsapp style={{ fontSize: '24px', marginRight: '12px' }} />
+              <FaWhatsapp style={{ fontSize: '24px', marginRight: '12px' }} aria-hidden="true" />
               WhatsApp 查詢
             </WhatsAppButton>
             <ContactInfo>
               <ContactInfoText component="p" fontSize="body1" color="white">
-                聯絡電話：+852 9831 0003
+                聯絡電話：+852 9381 0003
               </ContactInfoText>
             </ContactInfo>
           </ContactCard>

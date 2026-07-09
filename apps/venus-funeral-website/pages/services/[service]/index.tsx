@@ -45,7 +45,7 @@ const MoreSectionTextWrapper = styled.div`
   padding: 24px;
   align-items: center;
 
-  & h6 {
+  & h2 {
     font-size: 32px;
     color: white;
   }
@@ -54,13 +54,13 @@ const MoreSectionTextWrapper = styled.div`
     padding: 0 54px;
     align-items: flex-start;
 
-    & h6 {
+    & h2 {
       font-size: 52px;
     }
   }
 
   ${({ theme }) => theme.breakPoints.desktop} {
-    & h6 {
+    & h2 {
       font-size: 64px;
     }
   }
@@ -109,20 +109,30 @@ const ServiceDetailPage: NextPage = ({ data }: any) => {
       <Container>
         <MoreSection>
           <MoreSectionTextWrapper>
-            <Text fontSize="h2" component="h6">
+            <Text fontSize="h2" component="h2">
               聯絡我們
               <br />
               了解更多
             </Text>
             <ButtonLinksWrapper>
-              <IconButton href={process.env['facebookUrl']} target="_blank">
-                <MdFacebook />
+              <IconButton
+                href={process.env['facebookUrl']}
+                target="_blank"
+                aria-label="金星殯儀 Facebook 專頁"
+              >
+                <MdFacebook aria-hidden="true" />
               </IconButton>
-              <IconButton href={`tel:${process.env['phone']}`}>
-                <MdPhone />
+              <IconButton
+                href={`tel:${process.env['phone']}`}
+                aria-label="致電金星殯儀"
+              >
+                <MdPhone aria-hidden="true" />
               </IconButton>
-              <IconButton href={`mailto:${process.env['email']}`}>
-                <MdOutlineEmail />
+              <IconButton
+                href={`mailto:${process.env['email']}`}
+                aria-label="電郵聯絡金星殯儀"
+              >
+                <MdOutlineEmail aria-hidden="true" />
               </IconButton>
             </ButtonLinksWrapper>
           </MoreSectionTextWrapper>
@@ -134,7 +144,7 @@ const ServiceDetailPage: NextPage = ({ data }: any) => {
                 data.serviceImage,
                 720
               )}
-              alt=""
+              alt={`${data.serviceName}服務圖片`}
             />
           </PhotoWrapper>
         </MoreSection>

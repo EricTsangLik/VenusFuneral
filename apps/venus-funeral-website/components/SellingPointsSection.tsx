@@ -38,7 +38,7 @@ const PointCard = styled.div`
 
 const TextWrapper = styled.div`
   padding: 12px 24px;
-  h6 {
+  h2 {
     margin-bottom: 12px;
   }
 `;
@@ -67,9 +67,12 @@ const SellingPointsSection: React.FC = () => {
           {sellPoints &&
             sellPoints.map(({ header, content, image }, idx) => (
               <PointCard key={idx}>
-                <img src={transformCloundinaryImage(image, 600)} alt="photo" />
+                <img
+                  src={transformCloundinaryImage(image, 600)}
+                  alt={header || '服務特色'}
+                />
                 <TextWrapper>
-                  <Text component="h6" fontSize="h5">
+                  <Text component="h2" fontSize="h5">
                     {header}
                   </Text>
                   <Text component="p" fontSize="subtitle">

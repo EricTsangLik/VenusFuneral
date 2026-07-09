@@ -1,9 +1,10 @@
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { keytomic } from '../../lib/keytomic'
+import { listAllBlogs } from '../../lib/keytomic'
 import styled from 'styled-components'
+
+const PAGE_SIZE = 12
 
 const BlogContainer = styled.div`
   max-width: 1200px;
@@ -56,16 +57,111 @@ const ReadMore = styled.a`
   font-weight: bold;
 `
 
-export default function BlogIndex({ blogs, hasMore, nextCursor }: any) {
-  const router = useRouter();
-  const canonicalUrl = `https://venusfuneralservice.com${router.asPath}`;
+const Pagination = styled.nav`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 48px;
+`
+
+const PageLink = styled.a<{ $active?: boolean; $disabled?: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid ${({ $active }) => ($active ? '#B48650' : '#eaeaea')};
+  border-radius: 4px;
+  background: ${({ $active }) => ($active ? '#B48650' : '#fff')};
+  color: ${({ $active, $disabled }) =>
+    $disabled ? '#ccc' : $active ? '#fff' : '#333'};
+  text-decoration: none;
+  font-size: 14px;
+  pointer-events: ${({ $disabled }) => ($disabled ? 'none' : 'auto')};
+  cursor: ${({ $disabled }) => ($disabled ? 'default' : 'pointer')};
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+
+  &:hover {
+    border-color: ${({ $disabled }) => ($disabled ? '#eaeaea' : '#B48650')};
+    color: ${({ $active, $disabled }) =>
+      $disabled ? '#ccc' : $active ? '#fff' : '#B48650'};
+  }
+`
+
+const Ellipsis = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  color: #999;
+`
+
+function getPageNumbers(currentPage: number, totalPages: number) {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1)
+  }
+
+  const pages: (number | 'ellipsis')[] = [1]
+
+  if (currentPage > 3) {
+    pages.push('ellipsis')
+  }
+
+  const start = Math.max(2, currentPage - 1)
+  const end = Math.min(totalPages - 1, currentPage + 1)
+
+  for (let page = start; page <= end; page += 1) {
+    pages.push(page)
+  }
+
+  if (currentPage < totalPages - 2) {
+    pages.push('ellipsis')
+  }
+
+  pages.push(totalPages)
+  return pages
+}
+
+function getPageHref(page: number) {
+  return page <= 1 ? '/knowledges' : `/knowledges?page=${page}`
+}
+
+export default function BlogIndex({
+  blogs,
+  currentPage,
+  totalPages,
+}: {
+  blogs: any[]
+  currentPage: number
+  totalPages: number
+}) {
+  const canonicalPath =
+    currentPage <= 1 ? '/knowledges' : `/knowledges?page=${currentPage}`
+  const canonicalUrl = `https://venusfuneralservice.com${canonicalPath}`
+  const pageNumbers = getPageNumbers(currentPage, totalPages)
+  const hasPrev = currentPage > 1
+  const hasNext = currentPage < totalPages
 
   return (
     <>
       <Head>
-        <title>最新資訊與文章 | 金星殯儀服務</title>
+        <title>
+          {currentPage > 1
+            ? `最新資訊與文章 - 第 ${currentPage} 頁 | 金星殯儀服務`
+            : '最新資訊與文章 | 金星殯儀服務'}
+        </title>
         <meta name="description" content="瀏覽金星殯儀服務的最新資訊與文章" />
         <link rel="canonical" href={canonicalUrl} />
+        {hasPrev && (
+          <link rel="prev" href={`https://venusfuneralservice.com${getPageHref(currentPage - 1)}`} />
+        )}
+        {hasNext && (
+          <link rel="next" href={`https://venusfuneralservice.com${getPageHref(currentPage + 1)}`} />
+        )}
       </Head>
       <BlogContainer>
         <BlogTitle>最新資訊與文章</BlogTitle>
@@ -83,28 +179,81 @@ export default function BlogIndex({ blogs, hasMore, nextCursor }: any) {
             </BlogCard>
           ))}
         </BlogGrid>
+
+        {totalPages > 1 && (
+          <Pagination aria-label="文章分頁">
+            {hasPrev ? (
+              <Link href={getPageHref(currentPage - 1)} passHref>
+                <PageLink>上一頁</PageLink>
+              </Link>
+            ) : (
+              <PageLink as="span" $disabled>
+                上一頁
+              </PageLink>
+            )}
+
+            {pageNumbers.map((page, index) =>
+              page === 'ellipsis' ? (
+                <Ellipsis key={`ellipsis-${index}`}>…</Ellipsis>
+              ) : (
+                <Link key={page} href={getPageHref(page)} passHref>
+                  <PageLink $active={page === currentPage} aria-current={page === currentPage ? 'page' : undefined}>
+                    {page}
+                  </PageLink>
+                </Link>
+              )
+            )}
+
+            {hasNext ? (
+              <Link href={getPageHref(currentPage + 1)} passHref>
+                <PageLink>下一頁</PageLink>
+              </Link>
+            ) : (
+              <PageLink as="span" $disabled>
+                下一頁
+              </PageLink>
+            )}
+          </Pagination>
+        )}
       </BlogContainer>
     </>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const rawPage = Number(context.query.page)
+  const requestedPage = Number.isFinite(rawPage) && rawPage > 0 ? Math.floor(rawPage) : 1
+
   try {
-    const result = await keytomic.listBlogs(12);
+    const allBlogs = await listAllBlogs()
+    const totalPages = Math.max(1, Math.ceil(allBlogs.length / PAGE_SIZE))
+    const currentPage = Math.min(requestedPage, totalPages)
+    const start = (currentPage - 1) * PAGE_SIZE
+    const blogs = allBlogs.slice(start, start + PAGE_SIZE)
+
+    if (requestedPage !== currentPage) {
+      return {
+        redirect: {
+          destination: getPageHref(currentPage),
+          permanent: false,
+        },
+      }
+    }
+
     return {
       props: {
-        blogs: result.data.data,
-        hasMore: result.data.pageInfo.hasMore,
-        nextCursor: result.data.pageInfo.nextCursor || null,
+        blogs,
+        currentPage,
+        totalPages,
       },
     }
   } catch (error) {
-    console.error('Error fetching blogs:', error);
+    console.error('Error fetching blogs:', error)
     return {
       props: {
         blogs: [],
-        hasMore: false,
-        nextCursor: null,
+        currentPage: 1,
+        totalPages: 1,
       },
     }
   }

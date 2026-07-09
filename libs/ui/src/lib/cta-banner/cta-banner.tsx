@@ -33,7 +33,7 @@ export function CtaBanner(props: CtaBannerProps) {
   return (
     <StyledCtaBanner>
       <StyledContainer>
-        <Text component="h6" fontSize="h5">立即聯絡我們 了解更多</Text>
+        <Text component="h2" fontSize="h5">立即聯絡我們 了解更多</Text>
         <Button href="/contact">
         聯絡我們
         </Button>

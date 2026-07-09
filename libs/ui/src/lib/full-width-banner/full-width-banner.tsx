@@ -4,6 +4,7 @@ import { PropsWithChildren } from 'react';
 /* eslint-disable-next-line */
 export interface FullWidthBannerProps {
   imageSrc?: string;
+  imageAlt?: string;
 }
 
 const StyledFullWidthBanner = styled.div`
@@ -58,6 +59,7 @@ const TextContainer = styled.div`
 
 export function FullWidthBanner({
   imageSrc,
+  imageAlt = '頁面橫幅圖片',
   children
 }: PropsWithChildren<FullWidthBannerProps>) {
   return (
@@ -66,7 +68,7 @@ export function FullWidthBanner({
         {children}
       </TextContainer>
       <ImageWrapper>
-        <BannerImage src={imageSrc} alt="banner image" />
+        <BannerImage src={imageSrc} alt={imageAlt} />
       </ImageWrapper>
     </StyledFullWidthBanner>
   );

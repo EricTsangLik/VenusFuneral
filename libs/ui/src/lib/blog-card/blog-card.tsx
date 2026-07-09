@@ -32,9 +32,9 @@ const StyledBlogCard = styled.div`
 export function BlogCard({ href, thumbnail, title }: BlogCardProps) {
   return (
     <Link href={href}>
-      <a>
+      <a aria-label={title}>
         <StyledBlogCard>
-          <Thumbnail src={thumbnail} alt="thumbnail" />
+          <Thumbnail src={thumbnail} alt={`${title}封面`} />
           <Text fontSize="subtitle" component="p">{title}</Text>
         </StyledBlogCard>
       </a>

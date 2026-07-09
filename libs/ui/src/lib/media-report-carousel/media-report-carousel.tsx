@@ -146,7 +146,7 @@ export const MediaReportCarousel = React.memo(({ reports = [] }: MediaReportCaro
 
   return (
     <>
-    <Header component="h6" fontSize="h3">傳媒報導</Header>
+    <Header component="h2" fontSize="h3">傳媒報導</Header>
     <div style={{ overflow: 'hidden' }}>
       <StyledMediaReportCarousel>
         <Swiper
@@ -171,8 +171,16 @@ export const MediaReportCarousel = React.memo(({ reports = [] }: MediaReportCaro
             reports.map((it: any, idx: number) => (
               <SwiperSlide key={idx}>
                 <StyledCard>
-                  <a href={it.link} target="_blank" rel="noreferrer">
-                    <StyledImage src={it.thumbnail} />
+                  <a
+                    href={it.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`閱讀${it.header || '傳媒'}報導`}
+                  >
+                    <StyledImage
+                      src={it.thumbnail}
+                      alt={it.header ? `${it.header}報導封面` : '傳媒報導封面'}
+                    />
                   </a>
                   <StyledQuote fontSize="h6" component="p">
                     {reports[idx].quote}
@@ -189,15 +197,17 @@ export const MediaReportCarousel = React.memo(({ reports = [] }: MediaReportCaro
             onClick={clickPrevButtonHandler}
             backgroundColor="lightgray"
             disabled={activeIndex === 0}
+            aria-label="上一則報導"
           >
-            <MdKeyboardArrowLeft />
+            <MdKeyboardArrowLeft aria-hidden="true" />
           </IconButton>
           <IconButton
             onClick={clickNextButtonHandler}
             backgroundColor="lightgray"
             disabled={activeIndex === reports.length - 1}
+            aria-label="下一則報導"
           >
-            <MdKeyboardArrowRight />
+            <MdKeyboardArrowRight aria-hidden="true" />
           </IconButton>
         </ButtonWrappers>
       </StyledMediaReportCarousel>

@@ -108,8 +108,13 @@ export function Footer({ disableCta }: FooterProps) {
             <LinksWrapper>
               <h4>關注我們</h4>
               <Link href={facebookLink}>
-                <a style={{ fontSize: '32px' }}>
-                  <MdOutlineFacebook />
+                <a
+                  style={{ fontSize: '32px' }}
+                  aria-label="金星殯儀 Facebook 專頁"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <MdOutlineFacebook aria-hidden="true" />
                 </a>
               </Link>
               {/* {navItemsSecondRow &&
@@ -122,7 +127,7 @@ export function Footer({ disableCta }: FooterProps) {
           </LinksContainer>
           <LogoWrapper>
             <Link href="/">
-              <a>
+              <a aria-label="金星殯儀首頁">
                 <BottomLogo />
               </a>
             </Link>

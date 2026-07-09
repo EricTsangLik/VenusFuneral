@@ -174,6 +174,7 @@ const FlowerPage: NextPage = () => {
     >
       <FullWidthBanner
         imageSrc={transformCloundinaryImage(bannerImage, 891)}
+        imageAlt="帛事花牌服務"
       >
         <BannerTextWrapper>
           <Text fontSize="h2" component="h1" color="inherit">帛事花牌</Text>
@@ -193,7 +194,7 @@ const FlowerPage: NextPage = () => {
         }
       </KeyPointNodesWrapper>
       <SubHeaderContainer>
-        <Text fontSize="h3" component="h6">自選指定款式</Text>
+        <Text fontSize="h3" component="h2">自選指定款式</Text>
       </SubHeaderContainer>
       <StyledTabs onChange={changeSelectedTabHandler} id="list">
         {

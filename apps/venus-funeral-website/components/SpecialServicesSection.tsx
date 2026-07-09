@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 const ServiceWrapper = styled.div`
   margin-bottom: 32px;
 
-  & h6 {
+  & h3 {
     margin-bottom: 8px;
   }
 `
@@ -28,14 +28,14 @@ const Image = styled.img`
 const SpecialServicesSection: React.FC = () => {
   return (
     <>
-      <Text component="h5" fontSize="h3">
+      <Text component="h2" fontSize="h3">
         特式服務
       </Text>
       <Wrapper>
         {
           services && services.map(({ serviceName, serviceDescription, thumbnail }, idx) => (
             <ServiceWrapper key={idx}>
-              <Text component="h6" fontSize="h5">
+              <Text component="h3" fontSize="h5">
                 {serviceName}
               </Text>
               {
@@ -45,7 +45,10 @@ const SpecialServicesSection: React.FC = () => {
                   </Text>
                 )
               }
-              <Image src={transformCloundinaryImage(thumbnail, 1200)} alt="" />
+              <Image
+                src={transformCloundinaryImage(thumbnail, 1200)}
+                alt={`${serviceName}服務圖片`}
+              />
             </ServiceWrapper>
           ))
         }
