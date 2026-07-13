@@ -42,11 +42,11 @@ const ColumbariumPage = () => {
             <LocationInfo>
               <LocationGroup>
                 <LocationTitle fontSize="body1">骨灰龕位：</LocationTitle>
-                <Text fontSize="body1">沙田寶福山、屯門善緣 / 善果 / 善心</Text>
+                <Text fontSize="body1">沙田寶福山、屯門善緣 / 善果 / 善心、澳門永念亭私人骨灰龕</Text>
               </LocationGroup>
               <LocationGroup>
                 <LocationTitle fontSize="body1">神主牌位：</LocationTitle>
-                <Text fontSize="body1">沙田-西林寺、沙田-道榮園、紅磡-敬祖堂、澳門永念亭私人骨灰龕</Text>
+                <Text fontSize="body1">沙田-西林寺、沙田-道榮園、紅磡-敬祖堂</Text>
               </LocationGroup>
             </LocationInfo>
 

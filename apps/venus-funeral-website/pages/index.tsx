@@ -97,9 +97,7 @@ export function Index({ reports = [] }: any) {
         <Banner>
           <BannerImage src={transformCloundinaryImage(banner, 1440)} alt="金星殯儀服務" />
           <BannerTextWrapper>
-            <Text component="h1" fontSize="h2" color="white">
-              金星殯儀服務
-            </Text>
+
             <Button href="/services" variant="contained">
               查看服務
             </Button>
