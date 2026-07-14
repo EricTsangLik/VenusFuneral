@@ -219,26 +219,48 @@ const CleaningPage = () => {
           </SectionTitle>
           
           <BeforeAfterContainer>
-            <ComparisonWrapper>
-              <ImageBox>
-                <ImageLabel component="h4" fontSize="h6">
-                  清潔前 Before
-                </ImageLabel>
-                <ComparisonImage 
-                  src="/cleaning-before.jpeg" 
-                  alt="清潔前" 
-                />
-              </ImageBox>
-              <ImageBox>
-                <ImageLabel component="h4" fontSize="h6">
-                  清潔後 After
-                </ImageLabel>
-                <ComparisonImage 
-                  src="/cleaning-after.jpeg" 
-                  alt="清潔後" 
-                />
-              </ImageBox>
-            </ComparisonWrapper>
+            <ComparisonsStack>
+              <ComparisonWrapper>
+                <ImageBox>
+                  <ImageLabel component="h4" fontSize="h6">
+                    清潔前 Before
+                  </ImageLabel>
+                  <ComparisonImage
+                    src="/cleaning-before.jpeg"
+                    alt="清潔前"
+                  />
+                </ImageBox>
+                <ImageBox>
+                  <ImageLabel component="h4" fontSize="h6">
+                    清潔後 After
+                  </ImageLabel>
+                  <ComparisonImage
+                    src="/cleaning-after.jpeg"
+                    alt="清潔後"
+                  />
+                </ImageBox>
+              </ComparisonWrapper>
+              <ComparisonWrapper>
+                <ImageBox>
+                  <ImageLabel component="h4" fontSize="h6">
+                    清潔前 Before
+                  </ImageLabel>
+                  <ComparisonImage
+                    src="/cleaning-before1.jpeg"
+                    alt="清潔前"
+                  />
+                </ImageBox>
+                <ImageBox>
+                  <ImageLabel component="h4" fontSize="h6">
+                    清潔後 After
+                  </ImageLabel>
+                  <ComparisonImage
+                    src="/cleaning-after2.jpeg"
+                    alt="清潔後"
+                  />
+                </ImageBox>
+              </ComparisonWrapper>
+            </ComparisonsStack>
             <BeforeAfterNote component="p" fontSize="body2">
               * 以上為實際清潔案例，效果因應個別情況而有所不同
               <br />
@@ -884,11 +906,17 @@ const BeforeAfterContainer = styled.div`
   }
 `;
 
+const ComparisonsStack = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin-bottom: 32px;
+`;
+
 const ComparisonWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
-  margin-bottom: 32px;
 
   ${({ theme }) => theme.breakPoints.tablet} {
     grid-template-columns: repeat(2, 1fr);
