@@ -1,9 +1,12 @@
-import { Container, Text, transformCloundinaryImage } from '@venus-funeral/ui'
+import { Text, transformCloundinaryImage } from '@venus-funeral/ui'
 import styled from 'styled-components'
 import React from 'react'
 import { attributes } from '../../../content/specialServices.md'
 
 const { services } = attributes
+
+const isVideoUrl = (url: string) =>
+  /\.mp4($|\?)/i.test(url) || url.includes('/video/upload/')
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,6 +26,15 @@ const Image = styled.img`
   border-radius: 12px;
   margin: 24px 0 40px;
   width: 100%;
+`
+
+const Video = styled.video`
+  border-radius: 12px;
+  margin: 24px auto 40px;
+  width: 100%;
+  max-width: 560px;
+  display: block;
+  background: #000;
 `
 
 const SpecialServicesSection: React.FC = () => {
@@ -45,10 +57,20 @@ const SpecialServicesSection: React.FC = () => {
                   </Text>
                 )
               }
-              <Image
-                src={transformCloundinaryImage(thumbnail, 1200)}
-                alt={`${serviceName}服務圖片`}
-              />
+              {isVideoUrl(thumbnail) ? (
+                <Video
+                  src={thumbnail}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  aria-label={`${serviceName}服務影片`}
+                />
+              ) : (
+                <Image
+                  src={transformCloundinaryImage(thumbnail, 1200)}
+                  alt={`${serviceName}服務圖片`}
+                />
+              )}
             </ServiceWrapper>
           ))
         }
