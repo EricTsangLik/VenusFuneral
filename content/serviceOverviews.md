@@ -91,4 +91,7 @@ sellPoints:
   - header: 香港私人骨灰龕代理買賣
     content: 我們提供專業的骨灰龕代理與買賣服務，致力於為您和您的摯愛提供尊貴的安息之地。代理私人骨灰龕位地點包括沙田寶福山和屯門善緣 / 善果 / 善心。神主牌位可選擇於沙田-西林寺、沙田-道榮園及紅磡-敬祖堂、澳門永念亭私人骨灰龕，確保您能找到合適的安息之所。
     image: https://res.cloudinary.com/djblau8at/image/upload/v1763100154/%E7%A7%81%E4%BA%BA%E7%81%B0%E4%BD%8D%E4%BB%A3%E7%90%86%E5%B0%81%E9%9D%A2_kokq5z.jpg
+  - header: AI先人道別影片
+    content: 金星的「AI 先人道別」服務結合了尖端的人工智能技術，為家屬提供一個跨越生死的獨特追思與療癒體驗。透過整合先人生前的照片、影片與聲音片段，我們能夠重塑出栩栩如生的數碼化身，高度還原他們的容貌、表情與專屬語氣。
+    image: https://images.unsplash.com/photo-1760915383853-57e5ebfd1c7e?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 ---
