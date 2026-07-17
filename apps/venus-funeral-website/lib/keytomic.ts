@@ -74,10 +74,18 @@ export async function listAllBlogs() {
 export async function getAllKeytomicBlogsForSitemap() {
   const allBlogs = await listAllBlogs()
 
-  return allBlogs.map((blog) => ({
-    slug: blog.slug,
-    updatedAt: blog.updatedAt,
-    publishedAt: blog.publishedAt,
-    createdAt: blog.createdAt,
-  }))
+  return allBlogs
+    .map((blog) => ({
+      slug: blog.slug,
+      title: blog.title || blog.slug,
+      excerpt: blog.excerpt || blog.seo?.metaDescription || '',
+      updatedAt: blog.updatedAt,
+      publishedAt: blog.publishedAt,
+      createdAt: blog.createdAt,
+    }))
+    .sort((a, b) => {
+      const aDate = new Date(a.publishedAt || a.updatedAt || a.createdAt || 0).getTime()
+      const bDate = new Date(b.publishedAt || b.updatedAt || b.createdAt || 0).getTime()
+      return bDate - aDate
+    })
 }
